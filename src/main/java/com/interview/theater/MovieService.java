@@ -21,7 +21,10 @@ public class MovieService {
         Optional<String> movieId = movieRepository.findByTitle(movieRequest.title);
         if (movieId.isPresent()) {
             log.error("Movie with title {} already exists", movieRequest.title);
-            throw new ResponseStatusException(HttpStatus.CONFLICT, movieId.get());
+            throw new ResponseStatusException(
+                    HttpStatus.CONFLICT,
+                    "Movie with title " + movieRequest.getTitle() + " already exists"
+            );
         }
         else{
             log.info("Creating Movie with title {}", movieRequest.title);

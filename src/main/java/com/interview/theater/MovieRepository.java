@@ -3,10 +3,7 @@ package com.interview.theater;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Repository
 @Slf4j
@@ -15,10 +12,11 @@ public class MovieRepository {
 
     public Optional<String> findByTitle(String title) {
         return movies.values().stream()
-                .filter(m->m.getTitle().equalsIgnoreCase(title))
+                .filter(m -> Objects.equals(m.getTitle(), title))
                 .map(Movie::getId)
                 .findFirst();
     }
+
 
     public Movie saveMovie(Movie movie){
         movies.put(movie.getId(),movie);
